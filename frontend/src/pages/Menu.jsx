@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
@@ -14,7 +15,7 @@ function Menu() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/pizzas")
+      .get("${API_URL}/api/pizzas")
       .then((res) => {
         setPizzas(res.data.pizzas || []);
       })

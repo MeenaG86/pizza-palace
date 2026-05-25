@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {toast} from "react-toastify"
+import { API_URL } from "../../config";
 
 function ManagePizzas() {
 
@@ -16,7 +17,7 @@ function ManagePizzas() {
 
   const [editId, setEditId] = useState(null);
 
-  const API = "http://localhost:5000/api/pizzas";
+  const API = "${API_URL}/api/pizzas";
 
   // FETCH PIZZAS
   const fetchPizzas = async () => {

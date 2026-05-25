@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { API_URL } from "../config";
 function AdminPanel() {
 
   const [orders, setOrders] = useState([]);
@@ -9,7 +9,7 @@ function AdminPanel() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/orders/admin/all");
+      const res = await fetch("${API_URL}/api/orders/admin/all");
       const data = await res.json();
       setOrders(data);
     } catch (error) {
@@ -24,7 +24,7 @@ function AdminPanel() {
   // Update status
   const updateStatus = async (id, status) => {
     try {
-      await fetch(`http://localhost:5000/api/orders/admin/update/${id}`, {
+      await fetch(`${API_URL}/api/orders/admin/update/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

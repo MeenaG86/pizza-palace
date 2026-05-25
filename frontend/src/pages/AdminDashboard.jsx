@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 
 function AdminDashboard() {
 
@@ -9,7 +10,7 @@ function AdminDashboard() {
     try {
 
       const res = await fetch(
-        "http://localhost:5000/api/orders/admin/stats"
+        "${API_URL}/api/orders/admin/stats"
       );
 
       const data = await res.json();

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../config";
+
 
 function ManageOrders() {
   const [orders, setOrders] = useState([]);
 
-  const GET_API = "http://localhost:5000/api/orders/admin/all";
-  const UPDATE_API = "http://localhost:5000/api/orders/admin/update";
+  const GET_API = "${API_URL}/api/orders/admin/all";
+  const UPDATE_API = "${API_URL}/api/orders/admin/update";
 
   const fetchOrders = async () => {
     try {

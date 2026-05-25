@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {toast} from "react-toastify"
+import { API_URL } from "../config";
 
 function AdminLogin() {
 
@@ -16,7 +17,7 @@ function AdminLogin() {
     try {
 
       const res = await fetch(
-        "http://localhost:5000/api/auth/admin-login",
+        "${API_URL}/api/auth/admin-login",
         {
           method: "POST",
           headers: {
