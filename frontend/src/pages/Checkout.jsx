@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart } from "../redux/cartSlice";
+import { clearCart } from "../Redux/cartSlice";
 import {toast} from "react-toastify"
 import { API_URL } from "../config";
 

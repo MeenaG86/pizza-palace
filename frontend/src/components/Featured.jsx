@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import API from "../api/pizzaApi";
 
-import PizzaCard from "./PizzaCard";
+import PizzaCard from "./pizzaCard";
 
 function Featured() {
 
