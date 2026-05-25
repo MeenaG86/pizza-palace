@@ -5,7 +5,7 @@ import {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
-} from "../Redux/cartSlice";
+} from "../Redux/cartSlice.js";
 
 function Cart() {
 
