@@ -15,7 +15,7 @@ function Menu() {
 
   useEffect(() => {
     axios
-      .get("${API_URL}/api/pizzas")
+      .get(`${API_URL}/api/pizzas`)
       .then((res) => {
         setPizzas(res.data.pizzas || []);
       })

@@ -9,7 +9,7 @@ function AdminPanel() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("${API_URL}/api/orders/admin/all");
+      const res = await fetch(`${API_URL}/api/orders/admin/all`);
       const data = await res.json();
       setOrders(data);
     } catch (error) {

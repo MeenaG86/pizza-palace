@@ -17,7 +17,7 @@ function AdminLogin() {
     try {
 
       const res = await fetch(
-        "${API_URL}/api/auth/admin-login",
+        `${API_URL}/api/auth/admin-login`,
         {
           method: "POST",
           headers: {

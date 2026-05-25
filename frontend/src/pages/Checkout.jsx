@@ -58,7 +58,7 @@ function Checkout() {
     try {
 
       const response = await fetch(
-        "${API_URL}/api/orders/place",
+        `${API_URL}/api/orders/place`,
         {
           method: "POST",
           headers: {

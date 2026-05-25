@@ -17,7 +17,7 @@ function ManagePizzas() {
 
   const [editId, setEditId] = useState(null);
 
-  const API = "${API_URL}/api/pizzas";
+  const API = `${API_URL}/api/pizzas`;
 
   // FETCH PIZZAS
   const fetchPizzas = async () => {

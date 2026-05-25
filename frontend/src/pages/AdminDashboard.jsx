@@ -10,7 +10,7 @@ function AdminDashboard() {
     try {
 
       const res = await fetch(
-        "${API_URL}/api/orders/admin/stats"
+        `${API_URL}/api/orders/admin/stats`
       );
 
       const data = await res.json();
