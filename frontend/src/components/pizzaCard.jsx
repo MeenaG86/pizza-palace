@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { addToCart } from "../redux/cartSlice";
+import { addToCart } from "../Redux/cartSlice.js";
 
 function PizzaCard({ pizza }) {
 
