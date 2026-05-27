@@ -10,6 +10,7 @@ import EditProfile from "./pages/EditProfile";
 import Checkout from "./pages/Checkout"
 import ManagePizzas from "./pages/admin/ManagePizzas"
 import ManageOrders from "./pages/admin/ManageOrders"
+import PizzaDetails from "./pages/PizzaDetails";
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import MyOrders from "./pages/MyOrder"
@@ -35,6 +36,8 @@ function App(){
         <Route path="/" element={<Home />} />
 
         <Route path="/menu" element={<Menu />} />
+
+        <Route path="/pizza/:id" element={<PizzaDetails />} />
 
         <Route path="/cart" element={<ProtectedRoute> <Cart /></ProtectedRoute>}/>
 

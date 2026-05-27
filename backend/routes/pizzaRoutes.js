@@ -93,6 +93,26 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const pizza = await Pizza.findById(req.params.id);
+
+    if (!pizza) {
+      return res.status(404).json({
+        message: "No pizza found",
+      });
+    }
+
+    res.json({
+      success: true,
+      pizza,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+});
 
 // Update Pizza
 router.put("/:id", async (req, res) => {
