@@ -6,6 +6,7 @@ import Cart from "./pages/Cart"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
+import EditProfile from "./pages/EditProfile";
 import Checkout from "./pages/Checkout"
 import ManagePizzas from "./pages/admin/ManagePizzas"
 import ManageOrders from "./pages/admin/ManageOrders"
@@ -42,6 +43,8 @@ function App(){
         <Route path="/register" element={<Register />} />
 
         <Route path="/profile" element={<Profile />} />
+
+        <Route path="/edit-profile" element={<EditProfile />} />
 
         <Route path="/my-orders" element={<ProtectedRoute><MyOrders/></ProtectedRoute>}/>
 

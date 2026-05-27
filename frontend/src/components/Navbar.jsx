@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import Profile from "../pages/Profile";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -105,7 +106,13 @@ function Navbar() {
 
           {isLoggedIn ? (
             <>
-              <span className="hover:text-red-500 cursor-pointer">
+            {isUser && (
+      <Link to="/profile" className="hover:text-red-500">
+        Profile
+      </Link>
+    )}
+
+              <span >
                 Hi {username}
               </span>
 
@@ -126,7 +133,6 @@ function Navbar() {
                 Register
               </Link>
              
-             <Link to="/profile"className="hover:text-red-500">Profile</Link> 
             </>
           )}
 
@@ -185,6 +191,14 @@ function Navbar() {
 
           {isLoggedIn ? (
             <>
+             {isUser && (
+      <Link
+        to="/profile"
+        onClick={() => setMenuOpen(false)}
+      >
+        Profile
+      </Link>
+    )}
               <span>
                 Hi {username}
               </span>
@@ -206,9 +220,7 @@ function Navbar() {
                 Register
               </Link>
                           
-              <Link to="/profile"onClick={() => setMenuOpen(false)}>Profile</Link> 
-
-              
+            
             </>
           )}
 
