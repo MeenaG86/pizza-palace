@@ -125,8 +125,8 @@ function Navbar() {
               <Link to="/register" className="hover:text-red-500">
                 Register
               </Link>
-
-              
+             
+             <Link to="/profile"className="hover:text-red-500">Profile</Link> 
             </>
           )}
 
@@ -205,6 +205,8 @@ function Navbar() {
               <Link to="/register" onClick={() => setMenuOpen(false)}>
                 Register
               </Link>
+                          
+              <Link to="/profile"onClick={() => setMenuOpen(false)}>Profile</Link> 
 
               
             </>

@@ -1,21 +1,18 @@
 const express = require("express");
-
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-const jwt = require("jsonwebtoken");
 
-// Register API
+// REGISTER API
 router.post("/register", async (req, res) => {
-
   try {
-
     const { name, email, password } = req.body;
 
-    // Check existing user
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -24,19 +21,15 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // Hash password
     const salt = await bcrypt.genSalt(10);
-
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
     });
 
-    // Save user
     await newUser.save();
 
     res.status(201).json({
@@ -44,22 +37,18 @@ router.post("/register", async (req, res) => {
     });
 
   } catch (error) {
-
     res.status(500).json({
       message: "Server Error",
     });
-
   }
-
 });
-//Login API
+
+
+// LOGIN API
 router.post("/login", async (req, res) => {
-
   try {
-
     const { email, password } = req.body;
 
-    // Check user
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -68,7 +57,6 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    // Compare password
     const isMatch = await bcrypt.compare(
       password,
       user.password
@@ -80,31 +68,44 @@ router.post("/login", async (req, res) => {
       });
     }
 
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: "user",
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
     res.status(200).json({
       message: "Login successful",
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
 
   } catch (error) {
-
     res.status(500).json({
       message: "Server Error",
     });
-
   }
-
 });
+
+
+// ADMIN LOGIN API
 router.post("/admin-login", async (req, res) => {
-
   try {
-
     const { email, password } = req.body;
 
-    // Hardcoded admin
     if (
       email === "admin@gmail.com" &&
       password === "admin123"
     ) {
-
       const token = jwt.sign(
         {
           role: "admin",
@@ -119,7 +120,6 @@ router.post("/admin-login", async (req, res) => {
         success: true,
         token,
       });
-
     }
 
     res.status(401).json({
@@ -128,12 +128,60 @@ router.post("/admin-login", async (req, res) => {
     });
 
   } catch (error) {
-
     res.status(500).json({
       success: false,
       message: error.message,
     });
-
   }
 });
+
+
+// GET USER PROFILE
+router.get("/profile", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+});
+
+
+// UPDATE USER PROFILE
+router.put("/profile", authMiddleware, async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        name,
+        email,
+      },
+      {
+        new: true,
+      }
+    ).select("-password");
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user: updatedUser,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+});
+
+
 module.exports = router;
