@@ -1,0 +1,56 @@
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "../config";
+
+function Profile() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    axios
+      .get(`${API_URL}/api/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-96">
+        <h1 className="text-3xl font-bold mb-6 text-center">My Profile</h1>
+
+        {user ? (
+          <div>
+            <p className="mb-3">
+              <b>Name:</b> {user.name}
+            </p>
+
+            <p className="mb-3">
+              <b>Email:</b> {user.email}
+            </p>
+              <Link
+    to="/edit-profile"
+    className="inline-block mt-4 bg-red-500 text-white px-5 py-2 rounded-lg hover:bg-red-600"
+  >
+    Edit Profile
+  </Link>
+
+          </div>
+        ) : (
+          <p>Loading profile...</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Profile;
