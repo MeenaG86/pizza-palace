@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
+import { addToCart } from "../Redux/cartSlice.js";
 
 function PizzaDetails() {
   const { id } = useParams();
