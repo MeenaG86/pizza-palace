@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 function Hero() {
     return (
         <section className="bg-[#fff8f0] min-h-[90vh] pt-20 md:pt-16 relative z-10" >
@@ -26,7 +27,7 @@ function Hero() {
 
                         </p>
                         <div className="flex flex-col sm:flex-row gap-5 mt-8">
-                         <Link to="/menu">
+                           <Link to="/menu">
                             <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold duration-300">
 
                                 Order Now
@@ -39,7 +40,7 @@ function Hero() {
                                 View Menu
 
                             </button>
-                            </Link>
+                          </Link>
                         </div>
 
                     </div>
