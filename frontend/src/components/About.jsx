@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom"
+import ScrollToTop from "./ScrollToTop";
 function About() {
   return (
     
@@ -31,10 +33,11 @@ function About() {
             From classic Margherita to loaded Cheese Burst pizzas, we serve
             quality food with passion and love.
           </p>
-
+            <Link to="/menu" onClick={<ScrollToTop/>}>
           <button className="mt-8 bg-red-500 hover:bg-red-600 px-8 py-4 rounded-xl text-lg font-semibold duration-300">
             Explore Menu
           </button>
+          </Link>
 
         </div>
 
