@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {API_URL} from  "../config"
+import ScrollToTop from "../components/ScrollToTop";
 
 function Login() {
 
@@ -126,11 +127,11 @@ navigate("/");
           <p className="text-center text-gray-400">
 
             Don't have an account?{" "}
-
+           <Link to="/register" onClick={<ScrollToTop/>}>
             <span className="text-red-500 cursor-pointer hover:underline">
               Register
             </span>
-
+           </Link>
           </p>
 
         </form>

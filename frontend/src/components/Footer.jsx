@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
+
 function Footer() {
   return (
 
@@ -30,22 +33,18 @@ function Footer() {
             </h3>
 
             <ul className="space-y-3 text-gray-400">
-
-              <li className="hover:text-red-500 duration-300 cursor-pointer">
-                Home
-              </li>
+              <Link to="/" onClick={<ScrollToTop/>}>
+                <li className="hover:text-red-500 duration-300 cursor-pointer">
+                  Home
+                </li>
+              </Link>
+              <Link to="/menu" onClick={<ScrollToTop/>}>
 
               <li className="hover:text-red-500 duration-300 cursor-pointer">
                 Menu
               </li>
-
-              <li className="hover:text-red-500 duration-300 cursor-pointer">
-                About
-              </li>
-
-              <li className="hover:text-red-500 duration-300 cursor-pointer">
-                Contact
-              </li>
+              </Link>
+          
 
             </ul>
 

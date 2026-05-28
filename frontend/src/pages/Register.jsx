@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import {toast} from "react-toastify"
 import { API_URL } from "../config";
+import { Link } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
 function Register() {
 
   const [name, setName] = useState("");
@@ -158,11 +160,11 @@ function Register() {
           <p className="text-center text-gray-400">
 
             Already have an account?{" "}
-
+             <Link to="/login" onClick={<ScrollToTop/>}>
             <span className="text-red-500 cursor-pointer hover:underline">
               Login
             </span>
-
+            </Link>
           </p>
 
         </form>
