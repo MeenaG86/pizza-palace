@@ -125,6 +125,20 @@ function ManagePizzas() {
     }
   };
 
+  const toggleAvailability = async (id) => {
+  try {
+    await axios.put(`${API}/toggle/${id}`);
+
+    toast.success("Pizza status updated");
+
+    fetchPizzas();
+
+  } catch (error) {
+    console.log(error);
+    toast.error("Status update failed");
+  }
+};
+
   return (
 
     <div className="min-h-screen bg-gray-100 pt-28 px-6">
@@ -177,6 +191,7 @@ function ManagePizzas() {
           required
         />
 
+       
         <input
           type="text"
           name="image"
@@ -223,6 +238,17 @@ function ManagePizzas() {
             <p className="text-xl font-bold mt-3">
               ₹{pizza.price}
             </p>
+              <p
+  className={`mt-2 font-semibold ${
+    pizza.isAvailable
+      ? "text-green-500"
+      : "text-red-500"
+  }`}
+>
+  {pizza.isAvailable
+    ? "Available"
+    : "Unavailable"}
+</p>
 
             <div className="flex gap-3 mt-5">
 
@@ -239,6 +265,21 @@ function ManagePizzas() {
               >
                 Delete
               </button>
+
+              <button
+  onClick={() =>
+    toggleAvailability(pizza._id)
+  }
+  className={`text-white px-4 py-2 rounded ${
+    pizza.isAvailable
+      ? "bg-green-500"
+      : "bg-gray-500"
+  }`}
+>
+  {pizza.isAvailable
+    ? "Disable"
+    : "Enable"}
+</button>
 
             </div>
 

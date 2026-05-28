@@ -193,6 +193,35 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+// Toggle Pizza Availability
+router.put("/toggle/:id", async (req, res) => {
+  try {
+    const pizza = await Pizza.findById(req.params.id);
 
+    if (!pizza) {
+      return res.status(404).json({
+        success: false,
+        message: "Pizza not found",
+      });
+    }
+
+    pizza.isAvailable = !pizza.isAvailable;
+
+    await pizza.save();
+
+    res.json({
+      success: true,
+      message: "Pizza availability updated",
+      pizza,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+});
 
 module.exports = router;

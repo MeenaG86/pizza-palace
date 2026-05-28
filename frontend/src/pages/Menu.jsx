@@ -25,6 +25,11 @@ function Menu() {
   }, []);
 
   const filteredPizzas = pizzas.filter((pizza) => {
+      // Show only available pizzas
+  if (!pizza.isAvailable) {
+    return false;
+  }
+
     const pizzaCategory = pizza.category
     ?.toLowerCase()
     .replace(/\s/g, "-");

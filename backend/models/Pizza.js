@@ -26,6 +26,10 @@ const pizzaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
