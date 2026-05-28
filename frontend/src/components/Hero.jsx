@@ -26,19 +26,20 @@ function Hero() {
 
                         </p>
                         <div className="flex flex-col sm:flex-row gap-5 mt-8">
-
+                         <Link to="/menu">
                             <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold duration-300">
 
                                 Order Now
 
                             </button>
-
+                            </Link>
+                            <Link to="/menu">
                             <button className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-4 rounded-full text-lg font-semibold duration-300">
 
                                 View Menu
 
                             </button>
-
+                            </Link>
                         </div>
 
                     </div>
