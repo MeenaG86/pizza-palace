@@ -65,7 +65,7 @@ function ManageOrders() {
                   </h2>
 
                   <p className="mt-2">
-                    <b>Name:</b> {order.name || "Customer"}
+                    <b>Name:</b> {order.user?.name || "Customer"}
                   </p>
 
                   <p>
