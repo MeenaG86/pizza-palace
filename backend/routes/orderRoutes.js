@@ -197,5 +197,33 @@ router.get("/admin/stats", async (req, res) => {
   }
 });
 
+// DELETE ORDER
+router.delete("/admin/delete/:id", async (req, res) => {
+  try {
 
+    const order = await Order.findByIdAndDelete(
+      req.params.id
+    );
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Order deleted successfully",
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+
+  }
+});
 module.exports = router;

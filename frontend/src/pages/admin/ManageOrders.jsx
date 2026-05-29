@@ -2,22 +2,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
 
-
 function ManageOrders() {
   const [orders, setOrders] = useState([]);
 
   const GET_API = `${API_URL}/api/orders/admin/all`;
   const UPDATE_API = `${API_URL}/api/orders/admin/update`;
+  const DELETE_API = `${API_URL}/api/orders/admin/delete`;
 
   const fetchOrders = async () => {
     try {
       const res = await axios.get(GET_API);
-      console.log(res.data.orders);
       setOrders(res.data.orders || []);
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.message ||
-"Failed to fetch orders");
+      alert(
+        error.response?.data?.message ||
+        "Failed to fetch orders"
+      );
     }
   };
 
@@ -32,12 +33,41 @@ function ManageOrders() {
       });
 
       alert("Order status updated");
-
       fetchOrders();
+
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.message ||
-"Failed to update order status");
+      alert(
+        error.response?.data?.message ||
+        "Failed to update order status"
+      );
+    }
+  };
+
+  const deleteOrder = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this order?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      const res = await axios.delete(`${DELETE_API}/${id}`);
+
+      if (res.data.success) {
+        alert("Order deleted successfully");
+
+        setOrders(
+          orders.filter((order) => order._id !== id)
+        );
+      }
+
+    } catch (error) {
+      console.log(error);
+      alert(
+        error.response?.data?.message ||
+        "Failed to delete order"
+      );
     }
   };
 
@@ -54,7 +84,6 @@ function ManageOrders() {
           </h2>
         ) : (
           orders.map((order) => (
-            console.log(order),
             <div
               key={order._id}
               className="bg-white p-6 rounded-xl shadow"
@@ -93,7 +122,7 @@ function ManageOrders() {
                   </p>
                 </div>
 
-                <div>
+                <div className="flex flex-col gap-4">
                   <select
                     value={order.status || "Pending"}
                     onChange={(e) =>
@@ -108,6 +137,13 @@ function ManageOrders() {
                     </option>
                     <option value="Delivered">Delivered</option>
                   </select>
+
+                  <button
+                    onClick={() => deleteOrder(order._id)}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                  >
+                    Delete Order
+                  </button>
                 </div>
               </div>
 

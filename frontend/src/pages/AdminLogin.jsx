@@ -32,24 +32,20 @@ function AdminLogin() {
 
       const data = await res.json();
 
-      if (data.success) {
-       // clear old user login first
+     if (data.success) {
   localStorage.clear();
 
-  // store admin login
   localStorage.setItem("role", "admin");
   localStorage.setItem("token", data.token);
   localStorage.setItem("adminToken", data.token);
 
-        toast.success("Admin Login Successful");
+  toast.success("Admin Login Successful");
 
-        navigate("/dashboard");
+  navigate("/dashboard");
 
-      } else {
-
-        toast.success(data.message);
-
-      }
+} else {
+  toast.error(data.message || "Admin login failed");
+}
 
     } catch (error) {
 

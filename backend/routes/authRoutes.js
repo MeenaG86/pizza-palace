@@ -117,9 +117,10 @@ router.post("/admin-login", async (req, res) => {
       );
 
       return res.json({
-        success: true,
-        token,
-      });
+  success: true,
+  token,
+  role: "admin",
+});
     }
 
     res.status(401).json({
