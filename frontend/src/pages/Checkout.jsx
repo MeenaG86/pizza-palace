@@ -30,7 +30,7 @@ function Checkout() {
   const totalPrice = subtotal + delivery;
 
   // Place Order
-  const handlePlaceOrder = async () => {
+ /* const handlePlaceOrder = async () => {
 
     if (!name || !phone || !address || !city || !pincode) {
       toast.success("Please fill all fields");
@@ -93,7 +93,74 @@ function Checkout() {
       toast.success(error.response?.data?.message ||
 " Something went wrong");
     }
+  };*/
+  const handlePlaceOrder = async () => {
+
+  if (
+    !name.trim() ||
+    !phone.trim() ||
+    !address.trim() ||
+    !city.trim() ||
+    !pincode.trim()
+  ) {
+    toast.error("Please fill all fields");
+    return;
+  }
+
+  if (cartItems.length === 0) {
+    toast.error("Cart is empty");
+    return;
+  }
+
+  const orderData = {
+    name: name.trim(),
+    phone: phone.trim(),
+    address: address.trim(),
+    city: city.trim(),
+    pincode: pincode.trim(),
+
+    items: cartItems,
+    subtotal,
+    delivery,
+    totalPrice,
+
+    paymentMethod: payment,
   };
+
+  console.log("Sending order data:", orderData);
+
+  try {
+    const response = await fetch(`${API_URL}/api/orders/place`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    const data = await response.json();
+
+    console.log("Order response:", data);
+
+    if (data.success) {
+      toast.success("Order placed successfully");
+
+      dispatch(clearCart());
+
+      setName("");
+      setPhone("");
+      setAddress("");
+      setCity("");
+      setPincode("");
+    } else {
+      toast.error(data.message || "Order failed");
+    }
+
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong");
+  }
+};
 
   return (
 

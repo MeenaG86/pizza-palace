@@ -12,7 +12,7 @@ function ManageOrders() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(GET_API);
-
+      console.log(res.data.orders);
       setOrders(res.data.orders || []);
     } catch (error) {
       console.log(error);
@@ -54,6 +54,7 @@ function ManageOrders() {
           </h2>
         ) : (
           orders.map((order) => (
+            console.log(order),
             <div
               key={order._id}
               className="bg-white p-6 rounded-xl shadow"
@@ -65,7 +66,7 @@ function ManageOrders() {
                   </h2>
 
                   <p className="mt-2">
-                    <b>Name:</b> {order.user?.name || "Customer"}
+                    <b>Name:</b> {order.name || "Customer"}
                   </p>
 
                   <p>

@@ -6,26 +6,32 @@ const Order = require("../models/Order");
 
 
 // PLACE ORDER
-// PLACE ORDER
 router.post("/place", async (req, res) => {
 
   try {
+        console.log("REQ BODY:", req.body);
 
     const {
+      name,
       items,
+      subtotal,
+      delivery,
       totalPrice,
       address,
       city,
+      pincode,
       phone,
       paymentMethod,
     } = req.body;
 
     // VALIDATION
     if (
+      !name?.trim() ||
       !items ||
       items.length === 0 ||
       !address?.trim() ||
       !city?.trim() ||
+      !pincode?.trim() ||
       !phone?.trim()
     ) {
       return res.status(400).json({
@@ -46,11 +52,18 @@ router.post("/place", async (req, res) => {
     }
 
     const order = new Order({
-      items,
-      totalPrice: Number(totalPrice),
+      name,
+      phone,
       address,
       city,
-      phone,
+      pincode,
+
+      items,
+
+      subtotal: Number(subtotal),
+      delivery: Number(delivery),
+      totalPrice: Number(totalPrice),
+
       paymentMethod,
       status: "Pending",
     });
