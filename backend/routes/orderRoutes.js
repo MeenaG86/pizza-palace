@@ -52,7 +52,6 @@ router.post("/place", async (req, res) => {
     }
 
     const order = new Order({
-      
       name,
       phone,
       address,
