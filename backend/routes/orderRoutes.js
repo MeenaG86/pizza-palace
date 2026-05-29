@@ -52,6 +52,8 @@ router.post("/place", async (req, res) => {
     }
 
     const order = new Order({
+        customerId: req.user.id, // logged-in user id
+
       name,
       phone,
       address,
