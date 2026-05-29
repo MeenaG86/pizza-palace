@@ -38,9 +38,9 @@ function MyOrders() {
               className="bg-white p-6 rounded-lg shadow-md"
             >
               <h2 className="text-xl font-bold text-red-500">
-                Total: ₹{order.totalPrice}
+                ID: {order._id} 
               </h2>
-
+               <p className="text-lg font-bold">Total: ₹{order.totalPrice}</p>
               <p>📍 {order.address}, {order.city}</p>
               <p>📞 {order.phone}</p>
               <p>💳 {order.paymentMethod || "COD"}</p>
