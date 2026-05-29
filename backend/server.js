@@ -8,8 +8,6 @@ const authRoutes = require("./routes/authRoutes");
 
 const pizzaRoutes = require("./routes/pizzaRoutes");
 
-const paymentRoutes = require("./routes/paymentRoutes");
-
 const orderRoutes = require("./routes/orderRoutes");
 
 
@@ -43,8 +41,6 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/api/auth", authRoutes);
 
 app.use("/api/pizzas", pizzaRoutes);
-
-app.use("/api/payment", paymentRoutes);
 
 app.use("/api/orders", orderRoutes);
 

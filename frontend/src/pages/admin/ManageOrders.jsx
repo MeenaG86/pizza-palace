@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../config";
+import { toast } from "react-toastify";
 
 function ManageOrders() {
   const [orders, setOrders] = useState([]);
@@ -15,7 +16,7 @@ function ManageOrders() {
       setOrders(res.data.orders || []);
     } catch (error) {
       console.log(error);
-      alert(
+      toast.error(
         error.response?.data?.message ||
         "Failed to fetch orders"
       );
@@ -32,12 +33,12 @@ function ManageOrders() {
         status,
       });
 
-      alert("Order status updated");
+      toast.success("Order status updated");
       fetchOrders();
 
     } catch (error) {
       console.log(error);
-      alert(
+      toast.error(
         error.response?.data?.message ||
         "Failed to update order status"
       );
@@ -55,7 +56,7 @@ function ManageOrders() {
       const res = await axios.delete(`${DELETE_API}/${id}`);
 
       if (res.data.success) {
-        alert("Order deleted successfully");
+        toast.success("Order deleted successfully");
 
         setOrders(
           orders.filter((order) => order._id !== id)
@@ -64,7 +65,7 @@ function ManageOrders() {
 
     } catch (error) {
       console.log(error);
-      alert(
+      toast.error(
         error.response?.data?.message ||
         "Failed to delete order"
       );

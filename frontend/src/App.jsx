@@ -16,7 +16,6 @@ import PizzaDetails from "./pages/PizzaDetails";
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import MyOrders from "./pages/MyOrder"
-import AdminPanel from "./pages/AdminPanel"
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
@@ -55,8 +54,6 @@ function App(){
         <Route path="/my-orders" element={<ProtectedRoute><MyOrders/></ProtectedRoute>}/>
 
         <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-
-        <Route path="/admin" element={<AdminPanel />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
 
